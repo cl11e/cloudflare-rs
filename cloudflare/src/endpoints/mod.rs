@@ -9,7 +9,11 @@ pub mod argo_tunnel;
 pub mod cfd_tunnel;
 pub mod dns;
 pub mod load_balancing;
+#[macro_use]
+mod api_endpoint;
+pub mod queue;
 pub mod r2;
+pub mod shared_types;
 pub mod workers;
 pub mod workerskv;
 pub mod zones;
