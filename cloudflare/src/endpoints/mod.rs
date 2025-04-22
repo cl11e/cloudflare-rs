@@ -13,7 +13,6 @@ pub mod load_balancing;
 mod api_endpoint;
 pub mod queue;
 pub mod r2;
-pub mod shared_types;
 pub mod workers;
 pub mod workerskv;
 pub mod zones;

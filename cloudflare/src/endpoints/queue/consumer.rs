@@ -1,46 +1,55 @@
 use crate::api_endpoint;
-use crate::endpoints::shared_types::APIResponse;
 use crate::framework::endpoint::{EndpointSpec, Method, RequestBody};
 use crate::framework::response::{ApiResult, ApiSuccess};
-use serde::{Deserialize, Serialize};
 
 use super::consumer_types::Consumer;
 
 // INFO: ref. https://developers.cloudflare.com/api/resources/queues/subresources/consumers/
 
-// INFO: Creates a new consumer for a Queue
+api_gen!(Consumer);
 api_endpoint!(
+    /// Create A Queue Consumer
+    /// Creates a new consumer for a Queue.
+    /// <https://developers.cloudflare.com/api/resources/queues/subresources/consumers/methods/create/>
     POST,
-    CreateQueueConsumer => APIResponse > Consumer,
+    CreateQueueConsumer => Consumer,
     "accounts/{}/queues/{}/consumers";
     account_id,
     queue_id;
     params: Consumer
 );
 
-// INFO: Deletes the consumer for a queue.
 api_endpoint!(
+    /// Delete Queue Consumer
+    /// Deletes the consumer for a queue.
+    /// <https://developers.cloudflare.com/api/resources/queues/subresources/consumers/methods/delete/>
     DELETE,
-    DeleteQueueConsumer => APIResponse,
+    DeleteQueueConsumer => (),
     "accounts/{}/queues/{}/consumers/{}";
     account_id,
     queue_id,
     consumer_id
 );
 
-// INFO: Returns the consumers for a Queue
+api_gen!(Vec<Consumer>);
+
 api_endpoint!(
+    /// List Queue Consumers
+    /// Returns the consumers for a Queue.
+    /// <https://developers.cloudflare.com/api/resources/queues/subresources/consumers/methods/get/>
     GET,
-    ListQueueConsumer => APIResponse > Vec<Consumer> ,
+    ListQueueConsumer => Vec<Consumer>,
     "accounts/{}/queues/{}/consumers";
     account_id,
     queue_id
 );
 
-// INFO: Updates the consumer for a queue, or creates one if it does not exist.
 api_endpoint!(
+    /// Update Queue Consumer
+    /// Updates the consumer for a queue, or creates one if it does not exist..
+    /// <https://developers.cloudflare.com/api/resources/queues/subresources/consumers/methods/update/>
     PUT,
-    UpdateQueueConsumer => APIResponse > Consumer,
+    UpdateQueueConsumer => Consumer,
     "accounts/{}/queues/{}/consumers/{}";
     account_id,
     queue_id,

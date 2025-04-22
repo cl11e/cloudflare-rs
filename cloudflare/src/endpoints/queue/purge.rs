@@ -9,17 +9,27 @@ use super::types::Queue;
 
 #[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct ConfirmDelete {
+    /// Confimation that all messages will be deleted permanently.
     delete_messages_permanently: bool,
 }
 
 api_gen!(ConfirmDelete);
 
-// INFO:: Deletes all messages from the Queue.
 api_endpoint! (
+    /// Purge Queue
+    /// Deletes all messages from the Queue.
+    /// https://developers.cloudflare.com/api/resources/queues/subresources/purge/
     POST,
-    PurgeQueue => APIResponse > Queue,
+    PurgeQueue => Queue,
     "accounts/{}/queues/{}/purge";
     account_id,
     queue_id;
     params: ConfirmDelete
 );
+
+api_results!(QueuePurgeStatus {
+    /// Indicates if the last purge operation completed successfully.
+    completed: String,
+    /// Timestamp when the last purge operation started.
+    started_at: String
+});
