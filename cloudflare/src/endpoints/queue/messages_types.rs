@@ -24,8 +24,10 @@ pub struct RetriesRequest {
 }
 
 api_results!(AckQueue {
-    ack_count: i64,
-    retry_count: i64,
+    /// The number of messages that were succesfully acknowledged.
+    ackCount: u64,
+    /// The number of messages that were succesfully retried.
+    retryCount: u64,
     warnings: Vec<String>,
 });
 
@@ -33,5 +35,6 @@ api_results!(PullQueue {
     id: String,
     attempts: i64,
     body: String,
+    /// An ID that represents an "in-flight" message that has been pulled from a Queue. You must hold on to this ID and use it to acknowledge this message.
     lease_id: String,
 });

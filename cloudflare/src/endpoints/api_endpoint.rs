@@ -8,7 +8,6 @@ macro_rules! api_results {
         }) => {
         paste! {
             #[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
-            #[serde(rename_all = "snake_case")]
             pub struct [<$name Results>] {
                 $(
                     $(#[$field_meta])*
